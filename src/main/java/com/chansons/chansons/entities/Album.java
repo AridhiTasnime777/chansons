@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,12 @@ public class Album {
 	@JsonIgnore
 	@OneToMany(mappedBy = "album")
 	private List<Chanson> chansons;
+	public Album() {}
+	public Album(String nomalb, String descriptionalb) {
+		this.nomalb = nomalb;
+		this.descriptionalb = descriptionalb;
+	}
+
 
     public Long getIdalb() {
         return idalb;

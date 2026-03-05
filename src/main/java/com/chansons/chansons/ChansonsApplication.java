@@ -18,8 +18,8 @@ public class ChansonsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-chansonService.saveChanson(new Chanson("fadhel chaker", "ma32oul",new Date()));
+/*chansonService.saveChanson(new Chanson("fadhel chaker", "ma32oul",new Date()));
 chansonService.saveChanson(new Chanson("om kalthoum","sirt el hob" , new Date()));
 chansonService.saveChanson(new Chanson("amer dieb", "maaak albi", new Date()));
-}
+*/}
 }
