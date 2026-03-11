@@ -1,13 +1,15 @@
 package com.chansons.chansons.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import java.util.Date;
+
 import com.chansons.chansons.entities.Album;
 import com.chansons.chansons.entities.Chanson;
 
 public interface ChansonService {
+	Page<Chanson> getAllChansonsParPage(int page, int size);
     Chanson saveChanson(Chanson c);
 	Chanson updateChanson(Chanson c);
 	void deleteChanson(Chanson c);

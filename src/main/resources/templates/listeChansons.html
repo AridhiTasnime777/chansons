@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Liste des Chansons</title>
-<link rel="stylesheet" type="text/css" href="/chansons/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
 </head>
 <body>
 <div th:replace="~{template :: navbar}"></div>
@@ -17,7 +17,7 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Titre</th>       <!-- ✅ FIX: was "Nom Chanson" but column uses p.title -->
+            <th>Titre</th>
             <th>Artiste</th>
             <th>Album</th>
             <th>Actions</th>
@@ -25,28 +25,36 @@
         </thead>
         <tbody>
           <tr th:each="p : ${chansons}">
-            <td th:text="${p.idChanson}"></td>          <!-- ✅ FIX: was p.id → p.idChanson -->
-            <td th:text="${p.title}"></td>              <!-- ✅ FIX: was p.titre → p.title -->
+            <td th:text="${p.idChanson}"></td>
+            <td th:text="${p.title}"></td>
             <td th:text="${p.artist}"></td>
             <td th:if="${p.album != null}" th:text="${p.album.nomAlb}"></td>
-            <td th:if="${p.album == null}">Pas d'Album</td>  <!-- ✅ FIX: simpler null check -->
+            <td th:if="${p.album == null}">Pas d'Album</td>
             <td>
               <a class="btn btn-success btn-sm"
-                 th:href="@{/modifierChanson(id=${p.idChanson})}">Éditer</a>  <!-- ✅ FIX: idChanson -->
-            </td>
-            <td>
+                 th:href="@{/modifierChanson(id=${p.idChanson},page=${currentPage},size=${size})}">Éditer</a>
               <a class="btn btn-danger btn-sm"
                  onclick="return confirm('Êtes-vous sûr ?')"
-                 th:href="@{/supprimerChanson(id=${p.idChanson})}">Supprimer</a>  <!-- ✅ FIX: idChanson -->
+                 th:href="@{/supprimerChanson(id=${p.idChanson},page=${currentPage},size=${size})}">Supprimer</a>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <ul class="nav nav-pills">
+        <li th:each="page, status : ${pages}">
+          <a th:class="${status.index == currentPage ? 'btn btn-primary m-1' : 'btn btn-outline-primary m-1'}"
+             th:href="@{/ListeChansons(page=${status.index}, size=${size})}"
+             th:text="${status.index + 1}">
+          </a>
+        </li>
+      </ul>
+
     </div>
   </div>
 </div>
 
-<script src="/chansons/webjars/jquery/3.5.1/jquery.min.js"></script>
-<script src="/chansons/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </body>
 </html>

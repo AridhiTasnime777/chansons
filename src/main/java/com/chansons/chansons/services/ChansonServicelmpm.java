@@ -4,6 +4,8 @@ import java.util.Date;  // ✅ FIX: was missing — caused "cannot find symbol D
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.chansons.chansons.entities.Album;
@@ -19,7 +21,10 @@ public class ChansonServicelmpm implements ChansonService {
 
     @Autowired
     AlbumRepository albumRepository;
-
+    @Override
+    public Page<Chanson> getAllChansonsParPage(int page, int size) {
+    return chansonRepository.findAll(PageRequest.of(page, size));
+}
     @Override
     public Chanson saveChanson(Chanson c) {
         return chansonRepository.save(c);
